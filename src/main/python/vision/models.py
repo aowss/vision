@@ -12,6 +12,22 @@ MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 # Directory containing the trained weights file
 COCO_MODEL_PATH = os.path.join(ROOT_DIR, "resources", "models", "mask_rcnn_coco.h5")
 
+class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
+               'bus', 'train', 'truck', 'boat', 'traffic light',
+               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
+               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
+               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
+               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
+               'kite', 'baseball bat', 'baseball glove', 'skateboard',
+               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
+               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
+               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
+               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
+               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
+               'teddy bear', 'hair drier', 'toothbrush']
+
 # Configuration that will be used by the Mask-RCNN library
 class MaskRCNNConfig(mrcnn.config.Config):
     NAME = "coco_pretrained_model_config"
@@ -80,9 +96,10 @@ def draw_boxes(rgb_image, results_dictionary):
         y1, x1, y2, x2 = box
 
         # Draw the box
-        cv2.rectangle(bgr_image, (x1, y1), (x2, y2), (0, 255, 0), 1)
+        cv2.rectangle(bgr_image, (x1, y1), (x2, y2), (255, 0, 0), 1)
         # Annotate
-        cv2.putText(bgr_image, str(results_dictionary['class_ids'][index]) + '[ ' + str(results_dictionary['scores'][index]) + ' ]', (x1, y1 + 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255))
+        #cv2.putText(bgr_image, str(results_dictionary['class_ids'][index]) + '[ ' + str(results_dictionary['scores'][index]) + ' ]', (x1, y1 - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0))
+        cv2.putText(bgr_image, class_names[results_dictionary['class_ids'][index]], (x1, y1 - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0))
         index = index + 1
 
     return bgr_image[:, :, ::-1]

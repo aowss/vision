@@ -17,10 +17,12 @@ section3 = skimage.io.imread(os.path.join(INPUT_DIR, "850-100-50-100.jpg"))
 
 class Test(TestCase):
 
-    def setUp(self):
-        self.model = get_trained_model()
+    @classmethod
+    def setUpClass(cls):
+        cls.model = get_trained_model()
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(cls):
         cv2.destroyAllWindows()
 
     def test_full_image(self):
