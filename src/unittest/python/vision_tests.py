@@ -3,12 +3,12 @@ from unittest import TestCase
 import os
 import skimage
 
-from src.main.python.vision.models import get_trained_model, detect_objects, draw_boxes
+from vision.models import get_trained_model, detect_objects, draw_boxes
 
 import cv2
 
-INPUT_DIR = os.path.join("..", "resources", "images")
-OUTPUT_DIR = os.path.join("..", "resources", "annotated-images")
+INPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "resources", "images")
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "resources", "annotated-images")
 
 image = skimage.io.imread(os.path.join(INPUT_DIR, "crossing-1.jpg"))
 section1 = skimage.io.imread(os.path.join(INPUT_DIR, "200-200-200-300.jpg"))

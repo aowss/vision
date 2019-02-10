@@ -15,7 +15,6 @@ default_task = "publish"
 
 @init
 def set_properties(project):
-    project.build_depends_on("mock")
     project.build_depends_on("numpy")
     project.build_depends_on("opencv-python")
     project.build_depends_on("mrcnn")
